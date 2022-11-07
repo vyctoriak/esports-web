@@ -3,7 +3,7 @@ import * as Checkbox from '@radix-ui/react-checkbox';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { Check, GameController } from 'phosphor-react';
 import { Input } from './Form/Input';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FormEvent } from 'react';
 
 interface Game {
   id: string;
@@ -22,6 +22,19 @@ export function CreateAdModal() {
       });
   }, []);
 
+  function handleCreateAd(event: FormEvent) {
+    event.preventDefault();
+
+    console.log('Enviou o Form!!')
+
+    const formData = new FormData(event.target as HTMLFormElement)
+
+    const data = Object.fromEntries(formData)
+
+    console.log("data =====>", data)
+
+  }
+
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
@@ -31,7 +44,7 @@ export function CreateAdModal() {
           Publish ad
         </Dialog.Title>
 
-        <form className="mt-8 flex flex-col gap-4">
+        <form onSubmit={handleCreateAd} className="mt-8 flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <label htmlFor="game" className="font-semibold">
               What is the game?
