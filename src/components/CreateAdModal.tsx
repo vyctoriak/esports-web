@@ -5,6 +5,7 @@ import { Check, GameController } from "phosphor-react";
 import { Input } from "./Form/Input";
 import { useEffect, useState, FormEvent } from "react";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
 interface Game {
   id: string;
@@ -46,10 +47,10 @@ export function CreateAdModal() {
         hourEnd: data.hourEnd,
         useVoiceChannel: useVoice,
       });
-      alert("Ad created with sucess");
+      toast.success('Ad created with sucess ');
     } catch (error) {
       console.log(error);
-      alert("Error to create the ad!");
+      toast.error("Error to create the ad!");
     }
   }
 
@@ -242,6 +243,7 @@ export function CreateAdModal() {
             >
               <GameController size={24} /> Find duo
             </button>
+            <Toaster />
           </footer>
         </form>
       </Dialog.Content>
